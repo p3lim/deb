@@ -252,8 +252,7 @@ if [ -z "$_xancheck" ]; then
   err 'Unsupported CPU'
   exit 1
 fi
-_xanpkg="${_xancheck//CPU supports x86-64-/linux-xanmod-x64}"
-_pkgs+=("$_xanpkg")
+_pkgs+=("${_xancheck//CPU supports x86-64-/linux-xanmod-x64}")
 
 log 'Installing packages'
 grml-chroot /mnt /bin/bash << EOT
