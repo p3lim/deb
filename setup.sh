@@ -269,14 +269,11 @@ passwd -l root
 EOT
 
 log 'Enabling flatpak repo (flathub)'
-# resolved is fucked at this point so we'll manually copy the resolv.conf from host
-mv /mnt/etc/resolv.conf /mnt/etc/resolv.conf.bak
-cat /etc/resolv.conf > /mnt/etc/resolv.conf
+wget -qO /mnt/tmp/flathub.flatpakrepo https://flathub.org/repo/flathub.flatpakrepo
 grml-chroot /mnt /bin/bash << EOT
-flatpak remote-add flathub 'https://dl.flathub.org/repo/flathub.flatpakrepo'
+flatpak remote-add flathub /tmp/flathub.flatpakrepo
 EOT
-# then fix the resolv.conf
-mv /mnt/etc/resolv.conf.bak /mnt/etc/resolv.conf
+rm /mnt/tmp/flathub.flatpakrepo
 
 log 'Reconfigure kernel package'
 # TODO: there's some weirdness if this is not a separate step, need to do more tests later
