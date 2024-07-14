@@ -6,7 +6,7 @@ Features:
 
 - btrfs with subvolumes suitable for snapshots
 - systemd-boot instead of GRUB
-- xanmod kernel
+- [xanmod](https://xanmod.org) kernel
 - minified/debloated Gnome
 
 It doesn't cover everything, especially firmware, but it works on my machines.  
