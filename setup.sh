@@ -103,7 +103,6 @@ _pkgs=(
   # desktop
   desktop-base
   file-roller # archive app
-  firefox-esr
   fwupd
   gnome-clocks
   gnome-color-manager
