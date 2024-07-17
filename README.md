@@ -9,8 +9,7 @@ Features:
 - [xanmod](https://xanmod.org) kernel
 - minified/debloated Gnome
 
-It doesn't cover everything, especially firmware, but it works on my machines.  
-It also takes a long time to run compared to the official ISO, but that's fine by me.
+It doesn't cover everything, especially firmware, but it works on my machines.
 
 ## Usage
 
