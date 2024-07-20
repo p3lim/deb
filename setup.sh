@@ -92,12 +92,13 @@ _pkgs=(
   systemd-resolved # works well with networkmanager
   usbutils
   wget
-  zstd # required for compression, e.g. for initramfs
+  zstd # required for compression
 
-  # file system tools
+  # common/useful file system tools
   btrfs-progs
   dosfstools
   ntfs-3g
+  xfsprogs
   usb-modeswitch
 
   # efi
@@ -122,7 +123,7 @@ _pkgs=(
   gnome-clocks
   gnome-color-manager
   gnome-core
-  gnome-shell-extension-appindicator
+  gnome-shell-extension-appindicator # weird that gnome doesn't provide this
   gnome-shell-extension-manager
   gnome-software-plugin-flatpak
   gnome-tweaks
