@@ -44,6 +44,24 @@ while true; do
 done
 _disk="/dev/$_disk"
 
+while true; do
+  _codename=$(prompt 'Debian version:')
+
+  case "$_codename" in
+    stable|bookworm|sid|unstable)
+      break
+      ;;
+    *)
+      err 'Invalid version, must be one of: stable,bookworm,unstable,sid'
+      ;;
+  esac
+done
+
+case "$_codename" in
+  stable|bookworm)
+    _codename_stable=true
+esac
+
 log 'Unattended installation start, grab a drink while you wait'
 sleep 5
 
@@ -53,9 +71,6 @@ _vols+=('home /home')
 _vols+=('tmp /tmp')
 _vols+=('var /var')
 _vols+=('log /var/log')
-
-# debian codename
-_codename='bookworm'
 
 # btrfs mount options
 _opts='rw,noatime,space_cache=v2,compress=zstd,ssd,discard=async'
@@ -220,7 +235,9 @@ EOT
 
 log 'Enable additional repo suites and components'
 echo > /mnt/etc/apt/sources.list
-cat > /mnt/etc/apt/sources.list.d/debian.sources << EOF
+
+if $_codename_stable; then
+  cat > /mnt/etc/apt/sources.list.d/debian.sources << EOF
 Types: deb
 URIs: http://deb.debian.org/debian
 Suites: $_codename ${_codename}-updates
@@ -233,6 +250,15 @@ Suites: ${_codename}-security
 Components: main contrib non-free non-free-firmware
 Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
 EOF
+else
+  cat > /mnt/etc/apt/sources.list.d/debian.sources << EOF
+Types: deb
+URIs: http://deb.debian.org/debian
+Suites: $_codename
+Components: main contrib non-free non-free-firmware
+Signed-By: /usr/share/keyrings/debian-archive-keyring.gpg
+EOF
+fi
 
 log 'Adding xanmod repo and key'
 wget -qO- https://dl.xanmod.org/archive.key | gpg --dearmor -vo /mnt/etc/apt/keyrings/xanmod.gpg
