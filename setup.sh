@@ -126,6 +126,7 @@ _pkgs=(
   gnome-shell-extension-appindicator # weird that gnome doesn't provide this
   gnome-shell-extension-manager
   gnome-software-plugin-flatpak
+  gnome-calendar # nice-to-have default package that isn't included for some reason
   gnome-tweaks
   gstreamer1.0-libav # codecs
   gstreamer1.0-plugins-ugly # codecs
